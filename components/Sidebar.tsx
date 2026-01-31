@@ -117,8 +117,8 @@ interface SidebarProps {
   setCollapsed?: (collapsed: boolean) => void;
 }
 
-export default function Sidebar({ 
-  mobileOpen, 
+export default function Sidebar({
+  mobileOpen,
   onClose,
   collapsed = false,
   onToggleCollapse,
@@ -130,7 +130,7 @@ export default function Sidebar({
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
   const [companyProfile, setCompanyProfile] = useState<CompanyProfile | null>(null);
   const [isProfileLoaded, setIsProfileLoaded] = useState(false);
-  
+
   const unreadMessages = 3; // Mock unread message count
 
   useEffect(() => {
@@ -148,18 +148,18 @@ export default function Sidebar({
     const handleStorageChange = () => {
       setCompanyProfile(getCompanyProfile());
     };
-    
+
     // Handle custom event for same-tab updates
     const handleProfileUpdate = () => {
       setCompanyProfile(getCompanyProfile());
     };
-    
+
     // Listen for storage events (cross-tab)
     window.addEventListener('storage', handleStorageChange);
-    
+
     // Listen for custom event (same-tab)
     window.addEventListener('companyProfileUpdated', handleProfileUpdate);
-    
+
     return () => {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('companyProfileUpdated', handleProfileUpdate);
@@ -249,27 +249,24 @@ export default function Sidebar({
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-            borderRight: 'none',
-            bgcolor: '#1a1a1a',
-            backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-            boxShadow: '4px 0 24px rgba(0, 0, 0, 0.5)',
+            bgcolor: '#ffffff',
+            borderRight: '1px solid rgba(0, 0, 0, 0.12)',
           },
         }}
       >
-        <Box sx={{ overflow: 'auto', bgcolor: 'transparent', height: '100%', color: '#ffffff' }}>
+        <Box sx={{ overflow: 'auto', bgcolor: 'transparent', height: '100%', color: 'text.primary' }}>
           {/* Close Button for Mobile */}
           <Box sx={{ p: 2, display: 'flex', justifyContent: 'flex-end' }}>
             <IconButton
               onClick={onClose}
               sx={{
-                color: '#ffffff',
-                bgcolor: 'rgba(255, 255, 255, 0.1)',
+                color: 'text.primary',
+                bgcolor: 'rgba(0, 0, 0, 0.04)',
                 border: '1px solid',
-                borderColor: 'rgba(255, 255, 255, 0.2)',
+                borderColor: 'divider',
                 '&:hover': {
-                  bgcolor: 'rgba(255, 255, 255, 0.15)',
-                  borderColor: 'rgba(255, 255, 255, 0.3)',
+                  bgcolor: 'rgba(0, 0, 0, 0.08)',
+                  borderColor: 'text.secondary',
                 },
                 transition: 'all 0.2s ease',
               }}
@@ -280,16 +277,16 @@ export default function Sidebar({
 
           {/* Logo Section */}
           {companyProfile && (
-            <Box 
-              sx={{ 
-                p: 3.5, 
-                display: 'flex', 
-                alignItems: 'center', 
+            <Box
+              sx={{
+                p: 3.5,
+                display: 'flex',
+                alignItems: 'center',
                 gap: 2.5,
                 cursor: 'pointer',
                 borderRadius: 2,
                 '&:hover': {
-                  bgcolor: 'rgba(255, 255, 255, 0.08)',
+                  bgcolor: 'rgba(0, 0, 0, 0.04)',
                 },
                 transition: 'background-color 0.2s',
               }}
@@ -304,24 +301,24 @@ export default function Sidebar({
                   fontSize: '1.5rem',
                   fontWeight: 700,
                   border: '2px solid',
-                  borderColor: 'rgba(255, 255, 255, 0.2)',
+                  borderColor: 'divider',
                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
                 }}
               >
                 {companyProfile.name.charAt(0).toUpperCase()}
               </Avatar>
               <Box sx={{ flex: 1 }}>
-                <Typography variant="h6" fontWeight={700} sx={{ color: '#ffffff' }}>
+                <Typography variant="h6" fontWeight={700} sx={{ color: 'text.primary' }}>
                   {companyProfile.name}
                 </Typography>
-                <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                   Seller Portal
                 </Typography>
               </Box>
             </Box>
           )}
 
-          <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.1)', mx: 2 }} />
+          <Divider sx={{ borderColor: 'divider', mx: 2 }} />
 
           {/* Navigation */}
           <List sx={{ px: 2.5, py: 1.5, bgcolor: 'transparent' }}>
@@ -340,20 +337,20 @@ export default function Sidebar({
                           borderRadius: 2,
                           mb: 0.75,
                           py: 1.25,
-                          color: 'rgba(255, 255, 255, 0.9)',
+                          color: 'text.primary',
                           '&:hover': {
-                            bgcolor: 'rgba(255, 255, 255, 0.1)',
+                            bgcolor: 'rgba(0, 0, 0, 0.04)',
                           },
                           '&.Mui-selected': {
-                            bgcolor: 'rgba(255, 255, 255, 0.15)',
+                            bgcolor: 'rgba(0, 0, 0, 0.08)',
                           },
                         }}
                       >
                         <ListItemIcon>
-                          <item.icon sx={{ color: 'rgba(255, 255, 255, 0.7)', minWidth: 40 }} />
+                          <item.icon sx={{ color: 'text.secondary', minWidth: 40 }} />
                         </ListItemIcon>
-                        <ListItemText primary={item.name} sx={{ color: 'rgba(255, 255, 255, 0.9)' }} />
-                        {isOpen ? <ExpandLess sx={{ color: 'rgba(255, 255, 255, 0.7)' }} /> : <ExpandMore sx={{ color: 'rgba(255, 255, 255, 0.7)' }} />}
+                        <ListItemText primary={item.name} sx={{ color: 'text.primary' }} />
+                        {isOpen ? <ExpandLess sx={{ color: 'text.secondary' }} /> : <ExpandMore sx={{ color: 'text.secondary' }} />}
                       </ListItemButton>
                     </ListItem>
                     <Collapse in={isOpen} timeout="auto" unmountOnExit>
@@ -368,9 +365,9 @@ export default function Sidebar({
                                 borderRadius: 2,
                                 mb: 0.5,
                                 py: 1,
-                                color: 'rgba(255, 255, 255, 0.9)',
+                                color: 'text.primary',
                                 '&:hover': {
-                                  bgcolor: 'rgba(255, 255, 255, 0.1)',
+                                  bgcolor: 'rgba(0, 0, 0, 0.04)',
                                 },
                                 '&.Mui-selected': {
                                   bgcolor: 'primary.main',
@@ -385,9 +382,9 @@ export default function Sidebar({
                               }}
                             >
                               <ListItemIcon>
-                                <child.icon sx={{ color: isActive(child.href) ? 'inherit' : 'rgba(255, 255, 255, 0.7)', minWidth: 36 }} />
+                                <child.icon sx={{ color: isActive(child.href) ? 'inherit' : 'text.secondary', minWidth: 36 }} />
                               </ListItemIcon>
-                              <ListItemText primary={child.name} sx={{ color: isActive(child.href) ? 'inherit' : 'rgba(255, 255, 255, 0.9)' }} />
+                              <ListItemText primary={child.name} sx={{ color: isActive(child.href) ? 'inherit' : 'text.primary' }} />
                             </ListItemButton>
                           </ListItem>
                         ))}
@@ -406,9 +403,9 @@ export default function Sidebar({
                       borderRadius: 2,
                       mb: 0.75,
                       py: 1.25,
-                      color: 'rgba(255, 255, 255, 0.9)',
+                      color: 'text.primary',
                       '&:hover': {
-                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                        bgcolor: 'rgba(0, 0, 0, 0.04)',
                       },
                       '&.Mui-selected': {
                         bgcolor: 'primary.main',
@@ -423,9 +420,9 @@ export default function Sidebar({
                     }}
                   >
                     <ListItemIcon>
-                      <item.icon sx={{ color: isActive(item.href) ? 'inherit' : 'rgba(255, 255, 255, 0.7)', minWidth: 40 }} />
+                      <item.icon sx={{ color: isActive(item.href) ? 'inherit' : 'text.secondary', minWidth: 40 }} />
                     </ListItemIcon>
-                    <ListItemText primary={item.name} sx={{ color: isActive(item.href) ? 'inherit' : 'rgba(255, 255, 255, 0.9)' }} />
+                    <ListItemText primary={item.name} sx={{ color: isActive(item.href) ? 'inherit' : 'text.primary' }} />
                     {item.name === 'Messages' && unreadMessages > 0 && (
                       <Box
                         sx={{
@@ -450,7 +447,7 @@ export default function Sidebar({
             })}
           </List>
 
-          <Divider sx={{ my: 1.5, borderColor: 'rgba(255, 255, 255, 0.1)', mx: 2 }} />
+          <Divider sx={{ my: 1.5, borderColor: 'divider', mx: 2 }} />
 
           {/* Bottom Navigation */}
           <List sx={{ px: 2.5, py: 1.5, bgcolor: 'transparent' }}>
@@ -463,9 +460,9 @@ export default function Sidebar({
                     borderRadius: 2,
                     mb: 0.75,
                     py: 1.25,
-                    color: 'rgba(255, 255, 255, 0.9)',
+                    color: 'text.primary',
                     '&:hover': {
-                      bgcolor: 'rgba(255, 255, 255, 0.1)',
+                      bgcolor: 'rgba(0, 0, 0, 0.04)',
                     },
                     '&.Mui-selected': {
                       bgcolor: 'primary.main',
@@ -480,9 +477,9 @@ export default function Sidebar({
                   }}
                 >
                   <ListItemIcon>
-                    <item.icon sx={{ color: isActive(item.href) ? 'inherit' : 'rgba(255, 255, 255, 0.7)', minWidth: 40 }} />
+                    <item.icon sx={{ color: isActive(item.href) ? 'inherit' : 'text.secondary', minWidth: 40 }} />
                   </ListItemIcon>
-                  <ListItemText primary={item.name} sx={{ color: isActive(item.href) ? 'inherit' : 'rgba(255, 255, 255, 0.9)' }} />
+                  <ListItemText primary={item.name} sx={{ color: isActive(item.href) ? 'inherit' : 'text.primary' }} />
                 </ListItemButton>
               </ListItem>
             ))}
@@ -500,18 +497,15 @@ export default function Sidebar({
           '& .MuiDrawer-paper': {
             width: isCollapsed ? collapsedDrawerWidth : drawerWidth,
             boxSizing: 'border-box',
-            borderRight: 'none',
-            bgcolor: '#1a1a1a',
-            backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-            boxShadow: '4px 0 24px rgba(0, 0, 0, 0.5)',
+            bgcolor: '#ffffff',
+            borderRight: '1px solid rgba(0, 0, 0, 0.12)',
             transition: 'width 0.3s ease',
             overflowX: 'hidden',
           },
         }}
       >
-        <Box 
-          sx={{ overflow: 'auto', bgcolor: 'transparent', height: '100%', color: '#ffffff' }}
+        <Box
+          sx={{ overflow: 'auto', bgcolor: 'transparent', height: '100%', color: 'text.primary' }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -520,17 +514,17 @@ export default function Sidebar({
             {companyProfile && (
               <>
                 {!isCollapsed && (
-                  <Box 
-                    sx={{ 
-                      display: 'flex', 
-                      alignItems: 'center', 
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
                       gap: 2.5,
                       flex: 1,
                       cursor: 'pointer',
                       borderRadius: 2,
                       p: 1,
                       '&:hover': {
-                        bgcolor: 'rgba(255, 255, 255, 0.08)',
+                        bgcolor: 'rgba(0, 0, 0, 0.04)',
                       },
                       transition: 'background-color 0.2s',
                     }}
@@ -545,25 +539,25 @@ export default function Sidebar({
                         fontSize: '1.5rem',
                         fontWeight: 700,
                         border: '2px solid',
-                        borderColor: 'rgba(255, 255, 255, 0.2)',
-                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                        borderColor: 'divider',
+                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
                       }}
                     >
                       {companyProfile.name.charAt(0).toUpperCase()}
                     </Avatar>
                     <Box sx={{ flex: 1 }}>
-                      <Typography variant="h6" fontWeight={700} sx={{ color: '#ffffff' }}>
+                      <Typography variant="h6" fontWeight={700} sx={{ color: 'text.primary' }}>
                         {companyProfile.name}
                       </Typography>
-                      <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                      <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                         Seller Portal
                       </Typography>
                     </Box>
                   </Box>
                 )}
                 {isCollapsed && (
-                  <Box 
-                    sx={{ 
+                  <Box
+                    sx={{
                       cursor: 'pointer',
                       borderRadius: 2,
                       p: 1,
@@ -571,7 +565,7 @@ export default function Sidebar({
                       justifyContent: 'center',
                       width: '100%',
                       '&:hover': {
-                        bgcolor: 'rgba(255, 255, 255, 0.08)',
+                        bgcolor: 'rgba(0, 0, 0, 0.04)',
                       },
                       transition: 'background-color 0.2s',
                     }}
@@ -600,13 +594,13 @@ export default function Sidebar({
               <IconButton
                 onClick={handleToggleCollapse}
                 sx={{
-                  color: '#ffffff',
-                  bgcolor: isCollapsed ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255, 255, 255, 0.08)',
+                  color: 'text.secondary',
+                  bgcolor: isCollapsed ? 'rgba(0, 0, 0, 0.08)' : 'rgba(0, 0, 0, 0.04)',
                   border: '1px solid',
-                  borderColor: 'rgba(255, 255, 255, 0.15)',
+                  borderColor: 'divider',
                   '&:hover': {
-                    bgcolor: 'rgba(255, 255, 255, 0.15)',
-                    borderColor: 'rgba(255, 255, 255, 0.25)',
+                    bgcolor: 'rgba(0, 0, 0, 0.12)',
+                    borderColor: 'text.secondary',
                     transform: 'scale(1.05)',
                   },
                   ml: isCollapsed ? 0 : 1,
@@ -624,7 +618,7 @@ export default function Sidebar({
             </Tooltip>
           </Box>
 
-          <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.1)', mx: 2 }} />
+          <Divider sx={{ borderColor: 'divider', mx: 2 }} />
 
           {/* Navigation */}
           {!isCollapsed && (
@@ -654,10 +648,10 @@ export default function Sidebar({
                           }}
                         >
                           <ListItemIcon>
-                            <item.icon sx={{ color: 'rgba(255, 255, 255, 0.7)', minWidth: 40 }} />
+                            <item.icon sx={{ color: 'text.secondary', minWidth: 40 }} />
                           </ListItemIcon>
-                          <ListItemText primary={item.name} sx={{ color: 'rgba(255, 255, 255, 0.9)' }} />
-                          {isOpen ? <ExpandLess sx={{ color: 'rgba(255, 255, 255, 0.7)' }} /> : <ExpandMore sx={{ color: 'rgba(255, 255, 255, 0.7)' }} />}
+                          <ListItemText primary={item.name} sx={{ color: 'text.primary' }} />
+                          {isOpen ? <ExpandLess sx={{ color: 'text.secondary' }} /> : <ExpandMore sx={{ color: 'text.secondary' }} />}
                         </ListItemButton>
                       </ListItem>
                       <Collapse in={isOpen} timeout="auto" unmountOnExit>
@@ -672,9 +666,9 @@ export default function Sidebar({
                                   borderRadius: 2,
                                   mb: 0.5,
                                   py: 1,
-                                  color: 'rgba(255, 255, 255, 0.9)',
+                                  color: 'text.primary',
                                   '&:hover': {
-                                    bgcolor: 'rgba(255, 255, 255, 0.1)',
+                                    bgcolor: 'rgba(0, 0, 0, 0.04)',
                                   },
                                   '&.Mui-selected': {
                                     bgcolor: 'primary.main',
@@ -689,9 +683,9 @@ export default function Sidebar({
                                 }}
                               >
                                 <ListItemIcon>
-                                  <child.icon sx={{ color: isActive(child.href) ? 'inherit' : 'rgba(255, 255, 255, 0.7)', minWidth: 36 }} />
+                                  <child.icon sx={{ color: isActive(child.href) ? 'inherit' : 'text.secondary', minWidth: 36 }} />
                                 </ListItemIcon>
-                                <ListItemText primary={child.name} sx={{ color: isActive(child.href) ? 'inherit' : 'rgba(255, 255, 255, 0.9)' }} />
+                                <ListItemText primary={child.name} sx={{ color: isActive(child.href) ? 'inherit' : 'text.primary' }} />
                               </ListItemButton>
                             </ListItem>
                           ))}
@@ -710,9 +704,9 @@ export default function Sidebar({
                         borderRadius: 2,
                         mb: 0.75,
                         py: 1.25,
-                        color: 'rgba(255, 255, 255, 0.9)',
+                        color: 'text.primary',
                         '&:hover': {
-                          bgcolor: 'rgba(255, 255, 255, 0.1)',
+                          bgcolor: 'rgba(0, 0, 0, 0.04)',
                         },
                         '&.Mui-selected': {
                           bgcolor: 'primary.main',
@@ -727,9 +721,9 @@ export default function Sidebar({
                       }}
                     >
                       <ListItemIcon>
-                        <item.icon sx={{ color: isActive(item.href) ? 'inherit' : 'rgba(255, 255, 255, 0.7)', minWidth: 40 }} />
+                        <item.icon sx={{ color: isActive(item.href) ? 'inherit' : 'text.secondary', minWidth: 40 }} />
                       </ListItemIcon>
-                      <ListItemText primary={item.name} sx={{ color: isActive(item.href) ? 'inherit' : 'rgba(255, 255, 255, 0.9)' }} />
+                      <ListItemText primary={item.name} sx={{ color: isActive(item.href) ? 'inherit' : 'text.primary' }} />
                       {item.name === 'Messages' && unreadMessages > 0 && (
                         <Box
                           sx={{
@@ -782,7 +776,7 @@ export default function Sidebar({
                           }}
                         >
                           <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                            <item.icon sx={{ color: 'rgba(255, 255, 255, 0.7)' }} />
+                            <item.icon sx={{ color: 'text.secondary' }} />
                           </ListItemIcon>
                         </ListItemButton>
                       </ListItem>
@@ -800,9 +794,9 @@ export default function Sidebar({
                           mb: 0.75,
                           py: 1.25,
                           justifyContent: 'center',
-                          color: 'rgba(255, 255, 255, 0.9)',
+                          color: 'text.primary',
                           '&:hover': {
-                            bgcolor: 'rgba(255, 255, 255, 0.1)',
+                            bgcolor: 'rgba(0, 0, 0, 0.04)',
                           },
                           '&.Mui-selected': {
                             bgcolor: 'primary.main',
@@ -817,7 +811,7 @@ export default function Sidebar({
                         }}
                       >
                         <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                          <item.icon sx={{ color: isActive(item.href) ? 'inherit' : 'rgba(255, 255, 255, 0.7)' }} />
+                          <item.icon sx={{ color: isActive(item.href) ? 'inherit' : 'text.secondary' }} />
                         </ListItemIcon>
                       </ListItemButton>
                     </ListItem>
@@ -827,7 +821,7 @@ export default function Sidebar({
             </List>
           )}
 
-          <Divider sx={{ my: 1.5, borderColor: 'rgba(255, 255, 255, 0.1)', mx: 2 }} />
+          <Divider sx={{ my: 1.5, borderColor: 'divider', mx: 2 }} />
 
           {/* Bottom Navigation */}
           {!isCollapsed && (
@@ -841,9 +835,9 @@ export default function Sidebar({
                       borderRadius: 2,
                       mb: 0.75,
                       py: 1.25,
-                      color: 'rgba(255, 255, 255, 0.9)',
+                      color: 'text.primary',
                       '&:hover': {
-                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                        bgcolor: 'rgba(0, 0, 0, 0.04)',
                       },
                       '&.Mui-selected': {
                         bgcolor: 'primary.main',
@@ -858,9 +852,9 @@ export default function Sidebar({
                     }}
                   >
                     <ListItemIcon>
-                      <item.icon sx={{ color: isActive(item.href) ? 'inherit' : 'rgba(255, 255, 255, 0.7)', minWidth: 40 }} />
+                      <item.icon sx={{ color: isActive(item.href) ? 'inherit' : 'text.secondary', minWidth: 40 }} />
                     </ListItemIcon>
-                    <ListItemText primary={item.name} sx={{ color: isActive(item.href) ? 'inherit' : 'rgba(255, 255, 255, 0.9)' }} />
+                    <ListItemText primary={item.name} sx={{ color: isActive(item.href) ? 'inherit' : 'text.primary' }} />
                   </ListItemButton>
                 </ListItem>
               ))}
@@ -880,9 +874,9 @@ export default function Sidebar({
                         mb: 0.75,
                         py: 1.25,
                         justifyContent: 'center',
-                        color: 'rgba(255, 255, 255, 0.9)',
+                        color: 'text.primary',
                         '&:hover': {
-                          bgcolor: 'rgba(255, 255, 255, 0.1)',
+                          bgcolor: 'rgba(0, 0, 0, 0.04)',
                         },
                         '&.Mui-selected': {
                           bgcolor: 'primary.main',
@@ -897,7 +891,7 @@ export default function Sidebar({
                       }}
                     >
                       <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                        <item.icon sx={{ color: isActive(item.href) ? 'inherit' : 'rgba(255, 255, 255, 0.7)' }} />
+                        <item.icon sx={{ color: isActive(item.href) ? 'inherit' : 'text.secondary' }} />
                       </ListItemIcon>
                     </ListItemButton>
                   </ListItem>

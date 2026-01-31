@@ -497,6 +497,7 @@ export default function MessagesPage() {
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Typography
                           variant="body2"
+                          component="span"
                           color="text.secondary"
                           sx={{
                             overflow: 'hidden',

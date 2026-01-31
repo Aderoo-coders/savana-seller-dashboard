@@ -48,7 +48,7 @@ export default function FullPageForm({
             borderRadius: 2,
           }}
         >
-          <Box component="form" onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
+          <Box>
             <Grid container spacing={{ xs: 2, sm: 3 }}>
               {sideNavItems && sideNavItems.length > 0 && (
                 <Grid item xs={12} md={3} lg={3} sx={{ display: { xs: 'none', md: 'block' } }}>
@@ -98,7 +98,8 @@ export default function FullPageForm({
                 {cancelLabel}
               </Button>
               <Button
-                type="submit"
+                type="button"
+                onClick={onSubmit}
                 variant="contained"
                 color="primary"
                 fullWidth={isMobile}
