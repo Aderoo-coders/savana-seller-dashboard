@@ -1,0 +1,7 @@
+[?9001h[?1004h[?25l[2J[m[H]0;C:\WINDOWS\system32\cmd.exe [?25h[?25l
+> seller@0.1.0 dev C:\Desktop\gibe_market_web\apps\seller
+> next dev --port 3001 --turbopack[5;1H[?25h]0;next-server (v16.0.1)[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+   [38;2;173;127;168m[1m▲ Next.js 16.0.1[m (Turbopack)
+[?25l   - Local:        http://localhost:3001
+   - Network:      http://192.168.1.7:3001[11;1H [32m[1m✓[m Starting...
+[?25h[?9001l[?1004l
