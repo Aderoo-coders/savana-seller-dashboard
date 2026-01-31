@@ -483,6 +483,8 @@ export default function MessagesPage() {
                     </Badge>
                   </ListItemAvatar>
                   <ListItemText
+                    primaryTypographyProps={{ component: 'div' }}
+                    secondaryTypographyProps={{ component: 'div' }}
                     primary={
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
                         <Typography variant="body1" fontWeight={conversation.unreadCount > 0 ? 700 : 600}>
